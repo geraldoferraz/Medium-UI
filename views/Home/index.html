@@ -1,0 +1,65 @@
+<header class="bg-white text-gray-900 p-4 border-b-2 border-gray-100">
+    <div class="container mx-auto flex items-center justify-between">
+        <div class="relative flex items-center">
+            <span class="absolute left-3 text-gray-500">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <input ng-model="searchTitle" ng-change="searchPosts()" placeholder="Search" class="p-1.5 pl-10 rounded-full border-none bg-gray-100 text-gray-600 focus:outline-none w-auto">
+        </div>     
+        <div class="flex justify-between items-center gap-10">
+            <button class="text-gray-500 hover:text-gray-600" ng-click="goToCreatePost()" ng-if="isAuthenticated()">
+                <i class="fa-regular fa-pen-to-square mr-1 text-xl hover:text-gray-600"></i> Write
+            </button>
+            <button class="text-gray-500 mr-2 ml-2 text-xl"><i class="fa-regular fa-bell hover:text-gray-600"></i></button>
+            <button class="text-gray-500 ml-2 mr-2 text-xl" ng-click="goToHome()">
+                <i class="fa-regular fa-circle-user hover:text-gray-600"></i>
+            </button>
+            <button class="text-gray-500 ml-2 text-xl" ng-click="logout()" ng-if="isAuthenticated()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </button>
+        </div>  
+    </div>
+</header>
+
+<div ng-show="loading" class="flex justify-center items-center h-screen">
+    <img src="../../assets/loading-amigo.gif" alt="Loading..." class="w-20 h-20">
+</div>
+
+<div ng-hide="loading">
+    <div class="flex items-center space-x-4 border-b border-gray-200 max-w-3xl mx-auto mt-12 gap-4">
+        <div class="text-gray-500 cursor-pointer ml-2">
+            <button ng-click="goToCreatePost()" ng-if="isAuthenticated()">
+                <i class="fa-solid fa-plus pb-3"></i>
+            </button>
+        </div>
+      
+        <nav class="flex space-x-8">
+            <a href="#" class="text-gray-900 font-semibold pb-2 border-b-2 border-gray-500">
+                For you
+            </a>
+        </nav>
+    </div>
+    <div class="max-w-3xl mx-auto my-8" ng-repeat="post in posts">
+        <div class="p-4 border-b border-gray-200 rounded-lg flex pb-10"> 
+            <div class="flex-1"> 
+                <button class="w-full text-left" ng-click="onCardClick(post.id)">
+                    <div class="flex items-center gap-3">
+                        <img class="h-7 w-7 rounded-full" src="https://via.placeholder.com/48" alt="Avatar">
+                        <div class="text-sm font-semibold text-gray-600">{{ post.userName || 'Autor Desconhecido' }}</div>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mt-3">{{ post.title }}</h2>
+                    <p class="text-gray-600 mt-2 mr-4 max-h-24 overflow-hidden">{{ post.text }}</p>
+                </button>
+                <div class="flex items-center text-gray-500 text-sm mt-6 gap-4">
+                    <span>{{ post.available_at | date:'mediumDate' }}</span>
+                    <button class="flex items-center" ng-click="toggleLike(post)">
+                        <i class="fa-solid fa-heart mr-1 font-bold"></i> {{ post.total_likes || 0 }}
+                    </button>
+                </div>
+            </div>
+            <div class="flex-shrink-0 flex items-center justify-center ml-4"> 
+                <img class="h-24 w-36 object-cover rounded-lg" src="https://via.placeholder.com/150" alt="Imagem do Artigo">
+            </div>
+        </div>
+    </div>
+</div>

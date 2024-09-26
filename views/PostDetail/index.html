@@ -1,0 +1,65 @@
+<header class="bg-white text-gray-900 p-4 border-b-2 border-gray-100">
+  <div class="container mx-auto flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <i class="fa-regular fa-circle-user text-gray-500 text-xl font-bold" ng-if="isAuthenticated()"></i>
+      <h1 class="text-gray-500 hover:text-gray-600">{{ userName }}</h1>
+    </div>     
+      <div class="flex justify-between items-center gap-10">
+          <button class="text-gray-500 hover:text-gray-600" ng-click="goToCreatePost()" ng-if="isAuthenticated()">
+              <i class="fa-regular fa-pen-to-square mr-1 text-xl hover:text-gray-600"></i> Write
+          </button>
+          <button class="text-gray-500 mr-2 ml-2 text-xl"><i class="fa-regular fa-bell hover:text-gray-600"></i></button>
+          <button class="text-gray-500 ml-2 mr-0 text-xl" ng-click="goToHome()">
+              <i class="fa-regular fa-circle-user hover:text-gray-600"></i>
+          </button>
+      </div>  
+  </div>
+</header>
+
+<div ng-show="loading" class="flex justify-center items-center h-screen">
+  <img src="assets/loading-amigo.gif" alt="Loading..." class="w-20 h-20">
+</div>
+
+<div class="max-w-3xl mx-auto mt-12 bg-white p-6 rounded-lg" ng-hide="loading">
+  <h1 class="text-4xl font-bold text-gray-900">{{ post.title }}</h1>
+
+  <div class="flex items-center mt-4 ml-2">
+      <img class="h-10 w-10 rounded-full" ng-src="{{ post.authorAvatar }}" alt="Avatar">
+      <div class="ml-4">
+          <div class="text-gray-800 font-semibold">{{ post.authorName }}</div>
+          <div class="text-sm text-gray-500 flex items-center gap-1">
+              <span>{{ post.date | date:'mediumDate' }}</span>
+              <span>&middot;</span> 
+              <a href="#" class="text-green-600 font-semibold hover:underline">Follow</a>
+          </div>
+      </div>
+  </div>
+
+  <div class="flex items-center justify-between text-gray-500 text-sm mt-4 gap-6 border-t border-b border-gray-200 py-4">
+      <div class="flex items-center gap-6 ml-3">
+          <div class="flex items-center gap-1">
+              <i class="fa-solid fa-heart text-base"></i> {{ post.totalLikes }}
+          </div>
+      </div>
+      <div class="flex items-center gap-10 mr-3">
+        <button class="flex items-center gap-1" ng-click="delete()" ng-if="checkIfOwner(post)">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+          <div class="flex items-center gap-1">
+              <i class="fa-regular fa-circle-play text-base"></i>
+          </div>
+          <div class="flex items-center gap-1">
+              <i class="fa-solid fa-arrow-up-from-bracket text-base"></i>
+          </div>
+          <div class="flex items-center gap-1">
+              <i class="fa-solid fa-ellipsis text-base"></i>
+          </div>
+      </div>
+  </div>
+
+  <div class="mt-6">
+      <p class="text-lg text-gray-700 leading-relaxed mt-4">
+          {{ post.text }}
+      </p>
+  </div>
+</div>

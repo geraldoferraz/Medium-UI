@@ -1,0 +1,45 @@
+<body class="min-h-screen bg-muted antialiased flex items-center justify-center">
+  <div class="min-h-screen grid grid-cols-2 md:grid-cols-2 w-full">
+    <div class="hidden md:flex flex-col justify-between pr-12 py-10 bg-muted text-muted-foreground border-r border-foreground/5 transform -translate-x-10">
+        <div class="flex items-center gap-3 text-lg font-medium text-foreground ml-24">
+          <span class="font-semibold">Medium</span>
+        </div>
+        <div class="flex flex-col items-center justify-center">
+          <img src="../../assets/login.svg" alt="Auth Illustration" class="max-w-xl max-h-96">
+      </div>
+        <footer class="text-sm ml-24">
+          &copy; Posts monitorados pela equipe - Medium
+        </footer>
+      </div>      
+      
+    <div class="flex flex-col items-center justify-center p-8" ng-controller="LoginCtrl">
+      <div class="w-[350px] flex flex-col justify-center gap-6">
+        <div class="flex flex-col gap-2 text-center">
+          <h1 class="text-2xl font-semibold tracking-tight">Acessar posts</h1>
+          <p class="text-sm text-muted-foreground">Compartilhe conosco momentos únicos da sua vida</p>
+        </div>
+        
+        <form ng-submit="login()" class="space-y-4">
+          <div class="space-y-2">
+            <label for="email" class="block text-gray-700 font-semibold">E-mail</label>
+            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" ng-model="loginData.email" placeholder="Enter your email" required>
+          </div>
+
+          <div class="space-y-2 pb-1">
+            <label for="password" class="block text-gray-700 font-semibold">Senha</label>
+            <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" ng-model="loginData.password" placeholder="Enter your password" required>
+          </div>
+
+          <a href="#" class="text-sm transition-colors duration-300 ease-in-out hover:text-blue-500">
+            Ainda não tem conta?
+          </a>
+
+          <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" ng-disable="loading">
+            Acessar conta
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
